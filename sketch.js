@@ -12,6 +12,9 @@ let gameState = 0;
 
 function setup() {
   createCanvas(400, 400);
+  canvas.oncontextmenu = function (e) {
+    e.preventDefault();
+};
   textAlign(CENTER, CENTER);
   imageMode(CENTER);
   textFont("fontBold", 30);
