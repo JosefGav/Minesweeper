@@ -1,0 +1,33 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+
+h1 {
+  margin-bottom:0px;
+  padding-left:10px;
+  padding-top: 10px;
+  padding-bottom:10px;
+  background: darkgreen;
+  width: 390px;
+}
+
+div {
+  margin-top:0px;
+  background: darkgreen;
+  width: 400px;
+}
+img {
+  padding:10px;
+  width:40px;
+  height:40px;
+}
+
+#flagCount {
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
