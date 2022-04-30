@@ -55,6 +55,7 @@ function draw() {
   
   if (bombs ===0) {
     gameState = 2;
+    document.getElementById("flagCount").innerHTML = flags;
     stroke('black');
     fill('black');
     text('YOU WIN GOOD JOB!!!', width/2,height/2)
