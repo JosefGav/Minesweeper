@@ -3,9 +3,7 @@ let flag;
 let bomb;
 let time = 0;
 let flags = 0;
-let bombs = 0; 
-
-//make it so that there is a mine limit
+let bombs = 0;
 
 //keeps track of what stage of the game we are in. For example, at the start of the game (when game state is 0), uppon clicking any tile a small safe area will be revealed.
 let gameState = 0;
@@ -14,7 +12,7 @@ function setup() {
   createCanvas(400, 400);
   canvas.oncontextmenu = function (e) {
     e.preventDefault();
-};
+  };
   textAlign(CENTER, CENTER);
   imageMode(CENTER);
   textFont("fontBold", 30);
@@ -52,21 +50,20 @@ function draw() {
     document.getElementById("timer").innerHTML = time;
     document.getElementById("flagCount").innerHTML = flags;
   }
-  
-  if (bombs ===0) {
+
+  if (bombs === 0) {
     gameState = 2;
     document.getElementById("flagCount").innerHTML = flags;
-    stroke('black');
-    fill('black');
-    text('YOU WIN GOOD JOB!!!', width/2,height/2)
+    stroke("black");
+    fill("black");
+    text("YOU WIN GOOD JOB!!!", width / 2, height / 2);
   }
-  
+
   if (gameState === 2 && bombs != 0) {
-    stroke('black');
-    fill('black');
-    text('YOU LOOSSSSSE!!!', width/2,height/2)
+    stroke("black");
+    fill("black");
+    text("YOU LOOSSSSSE!!!", width / 2, height / 2);
   }
-  
 }
 
 //creates the map array
@@ -75,20 +72,30 @@ function makeMap() {
   let row = [];
   let push;
   let thing;
+  let indexX;
+  let indexY;
+
   for (let i = 0; i < 10; i++) {
     for (let c = 0; c < 10; c++) {
-      thing = Math.floor(Math.random() * 81);
-      if (thing < 71) {
-        push = [0, 0, 0, 0];
-      } else {
-        push = [1, 0, 0, 0];
-        flags++;
-        bombs++;
-      }
+      push = [0, 0, 0, 0];
       row.push(push);
     }
     map.push(row);
     row = [];
+  }
+
+  let i = 0;
+
+  while (i != 10) {
+    indexX = Math.floor(random(0, 9));
+    indexY = Math.floor(random(0, 9));
+
+    if (map[indexY][indexX][0] === 0) {
+      map[indexY][indexX][0] = 1;
+      flags++;
+      bombs++;
+      i++;
+    }
   }
   return map;
 }
@@ -131,10 +138,7 @@ function minesInRange(map) {
 //handles user interaction with the maps information. runs on click
 function mousePressed() {
   //makes sure the users click was on the canvas
-  if (mouseX <= width && 
-      mouseY <= height &&
-      gameState != 2
-     ) {
+  if (mouseX <= width && mouseY <= height && gameState != 2) {
     //changes the colour of the tile when clicked
     if (
       map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][2] === 0 &&
@@ -170,10 +174,10 @@ function mousePressed() {
         flag.resize(30, 30);
         image(flag, centerForTileX(), centerForTileY());
 
-
         flags--;
-        
-        if (map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][0] === 1) bombs--; 
+
+        if (map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][0] === 1)
+          bombs--;
         console.log(flags);
       } else if (
         map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][3] === 1
@@ -188,39 +192,40 @@ function mousePressed() {
           Math.floor(mouseX / 40),
           Math.floor(mouseY / 40)
         );
-        if (map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][0] === 1) bombs++; 
+        if (map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][0] === 1)
+          bombs++;
       }
     } else if (
       mouseButton === LEFT &&
       map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][3] != 1
     ) {
       //makes sure the tile has not been flagged ^
-      
 
-        //checks if the tile has a bomb indicated by the 0th index of the array
-        if (map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][0] === 1) {
-          //checks if the player is on their first turn. if this is true then the mine will be removed from the given position.
-          if (gameState === 0) {
-            gameState = 1;
-            removeMine(Math.floor(mouseX / 40), Math.floor(mouseY / 40));
-            floodFill(Math.floor(mouseY / 40), Math.floor(mouseX / 40));
-          } else {
-            //notifies the payer that they clicked on a mine.
-            bomb.resize(40, 40);
-            image(bomb, centerForTileX(), centerForTileY());
-            revealBombs();
-            console.log("u lose L");
-            gameState = 2;
-          }
-        } else {
+      //checks if the tile has a bomb indicated by the 0th index of the array
+      if (map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][0] === 1) {
+        //checks if the player is on their first turn. if this is true then the mine will be removed from the given position.
+        if (gameState === 0) {
           gameState = 1;
-          floodFill(Math.floor(mouseY / 40), Math.floor(mouseX / 40));
-          console.log("gj");
+          removeMine(Math.floor(mouseX / 40), Math.floor(mouseY / 40));
+          console.log("test");
 
-          //reveals how many bombs are next to the given tile
-          //howManyBombs(Math.floor(mouseY/40),Math.floor(mouseX/40));
+          floodFill(Math.floor(mouseY / 40), Math.floor(mouseX / 40));
+        } else {
+          //notifies the payer that they clicked on a mine.
+          bomb.resize(40, 40);
+          image(bomb, centerForTileX(), centerForTileY());
+          revealBombs();
+          console.log("u lose L");
+          gameState = 2;
         }
-      
+      } else {
+        gameState = 1;
+        floodFill(Math.floor(mouseY / 40), Math.floor(mouseX / 40));
+        console.log("gj");
+
+        //reveals how many bombs are next to the given tile
+        //howManyBombs(Math.floor(mouseY/40),Math.floor(mouseX/40));
+      }
     }
   }
 }
