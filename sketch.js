@@ -64,6 +64,7 @@ function draw() {
     fill("black");
     text("YOU LOOSSSSSE!!!", width / 2, height / 2);
   }
+  console.log(bombs);
 }
 
 //creates the map array
@@ -160,11 +161,12 @@ function mousePressed() {
       }
       //i should check if the tile has a mine b4 changing its color
     }
-    if (mouseButton === RIGHT && flags > 0) {
+    if (mouseButton === RIGHT ) {
       //checks if the tile had been flagged or clicked previously
       if (
         map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][3] === 0 &&
-        map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][2] === 0
+        map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][2] === 0 && 
+        flags > 0
       ) {
         //sets the 3rd index of the array to 1 to indicate the tile has been flagged
         map[Math.floor(mouseY / 40)][Math.floor(mouseX / 40)][3] = 1;
@@ -339,5 +341,41 @@ function revealBombs() {
         image(bomb, x * 40 + 20, y * 40 + 20);
       }
     }
+  }
+}
+
+function keyPressed() {
+  if (key === 'r') {
+    canvas.oncontextmenu = function (e) {
+    e.preventDefault();
+  };
+  bombs = 0;
+  flags = 0;
+  gameState = 0; 
+  time = 0;
+
+  //creates a map array to store the position of the tiles and their corresponding information
+  map = minesInRange(makeMap());
+
+  //so that the tiles dont have a border
+  //noStroke();
+
+  //creates the board pattern
+  background("green");
+  fill("darkgreen");
+  
+  for (let i = 0; i < 10; i++) {
+    for (let n = 0; n < 10; n++) {
+      if (i % 2 === 0) {
+        if (n % 2 === 0) {
+          square(n * 40, i * 40, 40);
+        }
+      } else {
+        if (n % 2 != 0) {
+          square(n * 40, i * 40, 40);
+        }
+      }
+    }
+  }
   }
 }
