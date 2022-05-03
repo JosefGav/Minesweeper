@@ -12,13 +12,13 @@ h1 {
   padding-top: 10px;
   padding-bottom:10px;
   background: darkgreen;
-  width: 390px;
+  width: 590px;
 }
 
 div {
   margin-top:0px;
   background: darkgreen;
-  width: 400px;
+  width: 600px;
 }
 img {
   padding:10px;
@@ -30,4 +30,31 @@ img {
   padding-left: 10px;
   padding-bottom: 10px;
 }
+
+body {
+  display:grid; 
+  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0px;
+}
+
+buttonContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  display:block;
+  margin: auto;
+  height: 100px;
+  width: 200px;
+  margin-top:100px;
+  margin-bottom:100px;
+  border-radius: 5px;
+
+}
+
+
+
+
 

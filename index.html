@@ -6,14 +6,26 @@
 
   </head>
   <body>
-    <main>
-      <h1>time: <span id="timer"></span></h1>
-    </main>
-    <script src="sketch.js"></script>
+    
     <div>
-      <img src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/triangular-flag_1f6a9.png">
-      <section id="flagCount"></section>
+      <main>
+        <h1>Time: <span id="timer"></span></h1>
+      </main>
+      <script src="sketch.js"></script>
+      <div>
+        <img src="https://emojipedia-us.s3.amazonaws.com/source/skype/289/triangular-flag_1f6a9.png">
+        <section id="flagCount"></section>
+      </div>
+    
+      <footer>press r to restart</footer>
+    </div>
+    
+    <div id="buttonContainer" style="background:#afd1ef">
+      <button onclick="changeSize(10)">Easy</button>
+      <button onclick="changeSize(16)">Medium</button>
+      <button onclick="changeSize(20)">Hard</button>
     </div>
   
+    
 
 </body></html>
