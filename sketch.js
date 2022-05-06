@@ -17,10 +17,11 @@ function preload() {
   song = loadSound("epic-hollywood-trailer-9489.mp3");
 }
 
+document.addEventListener("click", playSound);
+
 function setup() {
 
   createCanvas(600, 600);
-  song.play();
   
   gridDimension = width/gridSize;
   
@@ -60,7 +61,7 @@ function setup() {
 
 function draw() {
   if (gameState === 1 && frameCount % 60 === 0 && gameState != 2) {
-    song.setVolume(document.getElementById("volume").value/100,0.5);
+    song.setVolume(document.getElementById("volume").value/100,0.1);
     time++;
     document.getElementById("timer").innerHTML = time;
     document.getElementById("flagCount").innerHTML = flags;
@@ -74,7 +75,7 @@ function draw() {
     fill("black");
     text("YOU WIN GOOD JOB!!!", width / 2, height / 2);
     
-    song.setVolume(0,0.5);
+    song.setVolume(0,0.1);
   }
 
   if (gameState === 2 && bombs != 0) {
@@ -82,11 +83,11 @@ function draw() {
     fill("black");
     text("YOU LOOSSSSSE!!!", width / 2, height / 2);
     
-    song.setVolume(0,0.5);
+    song.setVolume(0,0.1);
   }
   
   if (gameState === 0) {
-    song.setVolume(0,0.5);
+    song.setVolume(0,0.1);
   }
 }
 
@@ -481,4 +482,7 @@ function changeSize(size){
   restart();
 }
 
+function playSound() {
+  song.play();
+}
 
