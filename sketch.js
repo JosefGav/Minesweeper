@@ -8,12 +8,19 @@ let gridDimension;
 let gridSize = 16
 let numBombs;
 let safeRadius
+let song;
 
 //keeps track of what stage of the game we are in. For example, at the start of the game (when game state is 0), uppon clicking any tile a small safe area will be revealed.
 let gameState = 0;
 
+function preload() {
+  song = loadSound("epic-hollywood-trailer-9489.mp3");
+}
+
 function setup() {
+
   createCanvas(600, 600);
+  song.play();
   
   gridDimension = width/gridSize;
   
@@ -53,9 +60,11 @@ function setup() {
 
 function draw() {
   if (gameState === 1 && frameCount % 60 === 0 && gameState != 2) {
+    song.setVolume(document.getElementById("volume").value/100,0.5);
     time++;
     document.getElementById("timer").innerHTML = time;
     document.getElementById("flagCount").innerHTML = flags;
+    
   }
 
   if (bombs === 0 && gameState != 0) {
@@ -64,16 +73,20 @@ function draw() {
     stroke("black");
     fill("black");
     text("YOU WIN GOOD JOB!!!", width / 2, height / 2);
+    
+    song.setVolume(0,0.5);
   }
 
   if (gameState === 2 && bombs != 0) {
     stroke("black");
     fill("black");
     text("YOU LOOSSSSSE!!!", width / 2, height / 2);
+    
+    song.setVolume(0,0.5);
   }
   
   if (gameState === 0) {
-    
+    song.setVolume(0,0.5);
   }
 }
 
@@ -109,8 +122,7 @@ function createSafeSpace(x,y) {
   
   if (
       (x === 0 || x === gridSize - 1) &&
-      (y === 0 || y === gridSize - 1) && 
-       gridSize != 10
+      (y === 0 || y === gridSize - 1) 
       ) {
     
       safeRadius ++;

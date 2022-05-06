@@ -1,24 +1,22 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-image:url("https://upload.wikimedia.org/wikipedia/commons/c/c6/Fleet_5_nations.jpg");
 }
 canvas {
   display: block;
+  border:5px solid black;
 }
 
 h1 {
-  margin-bottom:0px;
   padding-left:10px;
   padding-top: 10px;
   padding-bottom:10px;
-  background: darkgreen;
-  width: 590px;
 }
 
-div {
-  margin-top:0px;
-  background: darkgreen;
-  width: 600px;
+#main {
+  width: auto;
+  margin:auto;
 }
 img {
   padding:10px;
@@ -35,24 +33,51 @@ body {
   display:grid; 
   grid-template-rows: repeat(1, 1fr);
   grid-template-columns: repeat(2, 1fr);
-  gap: 0px;
 }
 
-buttonContainer {
-  display: flex;
-  flex-direction: column;
+div {
+  display: block;
 }
 
-button {
+#buttonContainer {
+  display: block;
+}
+
+
+button,.slidercontainer {
   display:block;
-  margin: auto;
+
   height: 100px;
   width: 200px;
+    margin: auto;
+
   margin-top:100px;
   margin-bottom:100px;
   border-radius: 5px;
 
 }
+
+input {
+  display:block;
+
+  height: 100px;
+  width: 200px;
+    margin: auto;
+
+  margin-bottom:100px;
+  border-radius: 5px;
+}
+
+#volImage {
+  margin:auto;
+  background-color:darkgreen;
+
+}
+
+
+
+
+
 
 
 

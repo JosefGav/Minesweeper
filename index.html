@@ -6,8 +6,7 @@
 
   </head>
   <body>
-    
-    <div>
+    <div id="main">
       <main>
         <h1>Time: <span id="timer"></span></h1>
       </main>
@@ -19,13 +18,16 @@
     
       <footer>press r to restart</footer>
     </div>
-    
-    <div id="buttonContainer" style="background:#afd1ef">
+    <div id="buttonContainer">
       <button onclick="changeSize(10)">Easy</button>
       <button onclick="changeSize(16)">Medium</button>
       <button onclick="changeSize(20)">Hard</button>
+      
+      <div class="slidercontainer">
+        <img src="sound-png-icon-0.png" style="width:200px height:200px" class="">
+        <input type="range" min="1" max="100" value="50" class="slider" id="volume">
+      </div>
     </div>
   
-    
 
 </body></html>
